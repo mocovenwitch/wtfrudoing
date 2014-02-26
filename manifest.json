@@ -9,7 +9,7 @@
     },
     "background": {
         "persistent": true,
-        "scripts": ["js/bg.js"]
+        "scripts": ["js/main.js"]
     },
     "permissions": [
         "tabs",
@@ -17,7 +17,7 @@
     ],
     "browser_action": {
         "default_title": "",
-        "default_icon": "images/icon.png",
+        "default_icon": "images/icon_128.png",
         "default_popup": "pages/popup.html"
     },
     "manifest_version": 2
