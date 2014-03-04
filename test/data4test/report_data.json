@@ -1,0 +1,16 @@
+[
+    {
+        "type": "music",
+        "time": "45"
+    },
+    {
+        "type": "sns",
+        "time": "300"
+    },
+    {
+        "type": "video",
+        "time": "800"
+    }
+
+]
+

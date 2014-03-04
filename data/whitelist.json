@@ -1,0 +1,42 @@
+[
+    {
+        "websites": [
+            {
+                "www.taobao.com": "eshop"
+            },
+            {
+                "www.tmall.com": "eshop"
+            },
+            {
+                "www.ebay.com": "eshop"
+            },
+            {
+                "www.jd.com": "eshop"
+            },
+            {
+                "www.amazon.cn": "eshop"
+            },
+            {
+                "weibo.com": "sns"
+            },
+            {
+                "twitter.com": "sns"
+            },
+            {
+                "www.4399.com": "game"
+            },
+            {
+                "www.zhihu.com": "sns"
+            },
+            {
+                "www.taobao.com": "eshop"
+            }
+        ]
+    },
+    {
+        "author": "Lene Huang"
+    },
+    {
+        "version": "0.1"
+    }
+]

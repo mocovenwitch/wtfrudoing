@@ -9,7 +9,7 @@
     },
     "background": {
         "persistent": true,
-        "scripts": ["js/main.js"]
+        "scripts": ["js/background.js"]
     },
     "permissions": [
         "tabs",
@@ -20,5 +20,15 @@
         "default_icon": "images/icon_128.png",
         "default_popup": "pages/popup.html"
     },
-    "manifest_version": 2
+    "manifest_version": 2,
+    "content_scripts": [{
+        "matches": [
+            "http://*/*",
+            "https://*/*",
+            "file:///*/*"
+        ],
+        "js": [
+            "js/content_script.js"
+        ]
+    }]
 }
