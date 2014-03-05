@@ -12,6 +12,7 @@
         "scripts": ["js/background.js"]
     },
     "permissions": [
+        "storage",
         "tabs",
         "<all_urls>"
     ],

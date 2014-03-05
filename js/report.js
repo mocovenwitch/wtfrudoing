@@ -17,7 +17,6 @@ var ERROR = {
 //types: eshop/sns/music/video/game/news/other
 
 var Report = {
-    report: this,
     chart: $('span.pie'),
     init: function() {
         this.getData();
@@ -33,7 +32,8 @@ var Report = {
     },
     renderToPage: function() {
         $.each(this.reportData, function(index, item) {
-            $('.report').find('.description-' + index).html('你有毛病吧');
+            //$('.report').find('.description-' + index).html('你有毛病吧');
+            $('.descriptions').append('<p class=\"description-' + index + '\">' + '你有毛病吧' + '</p>');
         });
     },
     reportData: '',
@@ -50,9 +50,10 @@ var Report = {
             },
             error: function() {
                 var errorMessage = ERROR.ERROR_GET_DATA_FAILED;
-                // ToDo: show error message to the page
-            }
 
+                $('.error').text(errorMessage);
+                $('.report').hide();
+            }
         });
 
         // for test, mock data from IndexDB
