@@ -3,11 +3,17 @@
  */
 
 $.fn.peity.defaults.pie = {
-  delimiter: null,
-  diameter: 16,
-  fill: ["#ff9900", "#fff4dd", "#ffd592"],
-  height: 300,
-  width: 300
+    delimiter: null,
+    diameter: 16,
+    fill: [
+        "#ff9900",
+        "#ffbb00",
+        "#ffee00",
+        "#fff4dd",
+        "#ffff00",
+        "#ffd592"],
+    height: 300,
+    width: 300
 }
 
 var ERROR = {
@@ -21,20 +27,16 @@ var Report = {
     init: function() {
         this.getData();
     },
-    load: function() {
-        this.chart.peity('pie');
-
-        // load data from database
-        //var reportData = ReportData.getData();
-
-        // render page
-        this.renderToPage();
-    },
     renderToPage: function() {
+        var pieParts;
         $.each(this.reportData, function(index, item) {
-            //$('.report').find('.description-' + index).html('你有毛病吧');
+            pieParts += ',' + item.time;
             $('.descriptions').append('<p class=\"description-' + index + '\">' + '你有毛病吧' + '</p>');
         });
+
+        pieParts = pieParts.right(1, pieParts.length - 1);
+        $('.report').find('.pie').text();
+        this.chart.peity('pie');
     },
     reportData: '',
     getData: function() {
@@ -46,7 +48,7 @@ var Report = {
             success: function(response) {
                 console.log(response);
                 Report.reportData = response;
-                Report.load();
+                Report.renderToPage();
             },
             error: function() {
                 var errorMessage = ERROR.ERROR_GET_DATA_FAILED;

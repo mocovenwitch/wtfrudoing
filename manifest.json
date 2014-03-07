@@ -8,8 +8,8 @@
         "128": "images/icon_128.png"
     },
     "background": {
-        "persistent": true,
-        "scripts": ["js/background.js"]
+        "scripts": ["js/background.js"],
+        "persistent": true
     },
     "permissions": [
         "storage",
@@ -29,7 +29,11 @@
             "file:///*/*"
         ],
         "js": [
+            "libs/jquery-2.0.3.js",
             "js/content_script.js"
         ]
-    }]
+    }],
+    "web_accessible_resources": [
+        "data/whitelist.json"
+    ]
 }

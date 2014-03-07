@@ -1,42 +1,47 @@
-[
     {
         "websites": [
             {
-                "www.taobao.com": "eshop"
+                "url":"taobao.com",
+                "type": "eshop"
             },
             {
-                "www.tmall.com": "eshop"
+                "url": "tmall.com",
+                "type": "eshop"
             },
             {
-                "www.ebay.com": "eshop"
+                "url": "ebay.com",
+                "type": "eshop"
             },
             {
-                "www.jd.com": "eshop"
+                "url": "jd.com",
+                "type": "eshop"
             },
             {
-                "www.amazon.cn": "eshop"
+                "url": "amazon.cn",
+                "type": "eshop"
             },
             {
-                "weibo.com": "sns"
+                "url": "weibo.com",
+                "type": "sns"
             },
             {
-                "twitter.com": "sns"
+                "url": "twitter.com",
+                "type": "sns"
             },
             {
-                "www.4399.com": "game"
+                "url": "4399.com",
+                "type": "game"
             },
             {
-                "www.zhihu.com": "sns"
+                "url": "zhihu.com",
+                "type": "sns"
             },
             {
-                "www.taobao.com": "eshop"
+                "url": "taobao.com",
+                "type": "eshop"
             }
-        ]
-    },
-    {
-        "author": "Lene Huang"
-    },
-    {
-        "version": "0.1"
+        ],
+        "author": "Lene Huang",
+        "version": "0.1",
+        "date": "2014-3-7"
     }
-]
