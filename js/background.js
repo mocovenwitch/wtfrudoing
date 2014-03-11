@@ -2,44 +2,42 @@
  * Created by lenehuang on 2/28/14.
  */
 
-/*
- * WEBSITE_TYPE:
- * Describe the types of all the Websites
- */
+'use strict'
 var WEBSITE_TYPE = {
   SNS: 'sns',
   GAME: 'game',
   ESHOP: 'eshop',
   MUSIC: 'music',
   VIDEO: 'video',
-  NEWS : 'news',
+  NEWS: 'news',
   OTHER: 'other'
 };
 
-/*
- * Time recorder:
- * Record the start time, leave time, and calculate the staying time
- *
- * start_time: the time after get the Website type
- * leave_time: current tab is inactive
- * staying_time: leave_time - start_time
- */
-var start_time, leave_time, staying_time;
 
-/*
- * Website URL:
- * Record the current URL and previous one
- */
-var current_website_url = '', previous_website_url = '-1';
+var WTFRUD = function() {
+  this.start_time = 0;
+  this.leave_time = 0;
+  this.staying_time = 0;
+  this.current_website_url = 0;
+  this.previous_website_url = '';
+  this.previous_site_type = WEBSITE_TYPE.OTHER;
+};
 
-/*
- * Website Type
- */
-var previous_site_type = WEBSITE_TYPE.OTHER;
+WTFRUD.prototype.afterGetCurrentUrl = function(url) {
+  this.current_website_url = url
 
-var getWebType = function(url) {
-  var currentUrl = url;
+  if(this.current_website_url != this.previous_website_url) {
+    console.log('leaving ' + this.previous_website_url + ', go to ' + this.current_website_url);
+    this.leave_time = Date.now();
+    this.staying_time = formatTime(this.leave_time - this.start_time);
 
+    if(!!this.staying_time) {
+      syncData(afterSyncData);
+    }
+  }
+};
+
+WTFRUD.prototype.getWebType = function() {
   // first, search in the whitelist
   $.ajax(chrome.extension.getURL('/data/whitelist.json'), {
     dataType: 'JSON',
@@ -48,13 +46,13 @@ var getWebType = function(url) {
       var type = WEBSITE_TYPE.OTHER;
 
       for(var key in websites) {
-        if(currentUrl.toLowerCase().indexOf(websites[key].url) >= 0) {
+        if(WTFRUD.current_website_url.toLowerCase().indexOf(websites[key].url) >= 0) {
           type = websites[key].type;
           break;
         }
       }
       console.log('[getWebType]:' + type);
-      onGetWebsiteTypelistener(currentUrl, type);
+      onGetWebsiteTypelistener(type);
     },
     error: function() {
       console.log('[getWebType]: error -' + 'can\'t get whitelist data!');
@@ -65,31 +63,30 @@ var getWebType = function(url) {
   //TODO:
 }
 
-var onGetWebsiteUrllisterner = function(url) {
+var onGetWebsiteUrllisterner = function() {
   console.log('[onGetWebsiteUrllisterner]: called');
 
-  var currentUrl = url;
-  if(!!currentUrl) {
-    getWebType(currentUrl);
+  if(!!WTFRUD.current_website_url) {
+    wtfrudoing.getWebType();
   } else {
     console.log('[onGetWebsiteUrllisterner]: ' + 'Can\'t get Website type without URL!');
   }
 }
 
-var onGetWebsiteTypelistener = function(url, type) {
+var onGetWebsiteTypelistener = function(type) {
   console.log('[onGetWebsiteTypelistener]: called');
 
   if(!!type) {
-    previous_site_type = type;
+    WTFRUD.previous_site_type = type;
   } else {
     console.log('[onGetWebsiteTypelistener]: ' + 'Failed to get the Website type!');
   }
-  start_time = Date.now();
+  WTFRUD.start_time = Date.now();
 }
 
 var afterSyncData = function() {
-  onGetWebsiteUrllisterner(current_website_url);
-  previous_website_url = current_website_url;
+  onGetWebsiteUrllisterner();
+  WTFRUD.previous_website_url = WTFRUD.current_website_url;
 }
 
 
@@ -109,8 +106,8 @@ var syncData = function(afterSyncData) {
     if(previous_data != undefined && previous_data.length > 0) {
       //  4.2 update the data
       $.each(previous_data, function(key, item) {
-        if(item.type == previous_site_type) {
-          item.time += staying_time;
+        if(item.type == WTFRUD.previous_site_type) {
+          item.time += WTFRUD.staying_time;
           used = true;
         }
         updated_data.push(item);
@@ -119,29 +116,30 @@ var syncData = function(afterSyncData) {
 
     if(!used) {
       updated_data.push({
-        'type': previous_site_type,
-        'time': staying_time
+        'type': WTFRUD.previous_site_type,
+        'time': WTFRUD.staying_time
       });
     }
 
     //  4.3 save to storage
-    console.log(updated_data);
     chrome.storage.sync.set({"reading_log": updated_data}, function() {
-      console.log('[syncData]: ' + 'Data saved in the storage.')
+      afterSyncData();
+      console.log('[syncData]: Data saved in the storage: ', updated_data);
     });
 
-    afterSyncData();
+
   }
 
   chrome.storage.sync.get("reading_log", function(items) {
     previous_data = items["reading_log"];
-    console.log('[syncData]: Get sync data.' + items["reading_log"]);
+    console.log('[syncData]: Get sync data: ', items["reading_log"]);
 
     sync(afterSyncData);
   });
 
 }
 
+var wtfrudoing = new WTFRUD();
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   var type = message.type;
@@ -152,10 +150,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       chrome.windows.getCurrent(function (currentWindow) {
         chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
           url = activeTabs[0].url;
-          current_website_url = url;
-          previous_website_url = url;
+          WTFRUD.current_website_url = url;
+          WTFRUD.previous_website_url = url;
 
-          onGetWebsiteUrllisterner(current_website_url);
+          onGetWebsiteUrllisterner();
 
           sendResponse({result: url});
         });
@@ -167,30 +165,23 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   return true;
 });
 
+var GET_CURRENT_URL = function(callback) {
+  chrome.windows.getCurrent(function (currentWindow) {
+    chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
+      var url = activeTabs[0].url;
+      callback(url);
+    });
+  });
+};
 
 chrome.tabs.onActiveChanged.addListener(function() {
   console.log('[chrome.tabs.onActived.addListener]: called');
 
-  chrome.windows.getCurrent(function (currentWindow) {
-    chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
-      url = activeTabs[0].url;
-      current_website_url = url
-
-      if(current_website_url != previous_website_url) {
-        console.log('leaving ' + previous_website_url + ', goto ' + current_website_url);
-        leave_time = Date.now();
-        staying_time = formatTime(leave_time - start_time);
-
-        if(!!staying_time) {
-          syncData(afterSyncData);
-        }
-      }
-    });
-  });
+  GET_CURRENT_URL(WTFRUD.prototype.afterGetCurrentUrl);
 });
 
 var formatTime = function(time) {
-  var formatedTime = 0;
+  var formatedTime;
 
   formatedTime = parseInt(time / 60000);
   if(formatedTime < 1)formatedTime = 1;
