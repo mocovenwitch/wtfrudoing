@@ -2,17 +2,12 @@
  * Created by lenehuang on 3/3/14.
  */
 
-var getCurrentURL = function() {
-  var url;
-
-  console.log('[getCurrentURL]: called');
-  chrome.runtime.sendMessage({type: 'current_url'}, function(response) {
-    url = response.result;
-    console.log('[getCurrentURL]:' + url);
-//    onGetWebsiteUrllisterner(url);
+var startRecord = function() {
+  chrome.runtime.sendMessage({type: 'start'}, function(response) {
+    console.log('[startRecord]:' + response.result);
   });
 };
 
-getCurrentURL();
+startRecord();
 
 //chrome.storage.sync.clear();
