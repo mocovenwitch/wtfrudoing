@@ -19,7 +19,12 @@ footer {
     align-content: center;
 }
 
+.container {
+  text-align: center;
+}
+
 .jumbotron .container {
-    padding-left: 0;
+  padding-left: 0;
+
 }
 
