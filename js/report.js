@@ -28,14 +28,14 @@ var Report = {
         this.getData();
     },
     renderToPage: function() {
-        var pieParts;
+        var pieParts = '';
         $.each(this.reportData, function(index, item) {
             pieParts += ',' + item.time;
             $('.descriptions').append('<p class=\"description-' + index + '\">' + '你有毛病吧' + '</p>');
         });
 
-        pieParts = pieParts.right(1, pieParts.length - 1);
-        $('.report').find('.pie').text();
+        pieParts = pieParts.toString().substring(1, pieParts.length);
+        $('.report').find('.pie').text(pieParts);
         this.chart.peity('pie');
     },
     reportData: '',
@@ -43,6 +43,7 @@ var Report = {
         var dataJSON;
 
         // for test, mock data from JSON
+        /*
         $.ajax('/test/data4test/report_data.json', {
             dataType: 'JSON',
             success: function(response) {
@@ -57,10 +58,17 @@ var Report = {
                 $('.report').hide();
             }
         });
+        */
 
         // for test, mock data from IndexDB
 
-        // for release
+        // for release, get data from chrome storage
+        var mydata = 'reading_log';
+        chrome.storage.sync.get(mydata, function(item) {
+          var data = item[mydata];
+          Report.reportData = data;
+          Report.renderToPage();
+        });
     }
 
 };

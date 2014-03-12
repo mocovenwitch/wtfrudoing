@@ -123,15 +123,15 @@ var syncData = function(afterSyncData) {
     }
 
     //  4.3 save to storage
-    chrome.storage.sync.set({"reading_log": updated_data}, function() {
+    chrome.storage.sync.set({mydata: updated_data}, function() {
       afterSyncData();
       console.log('[syncData]: Data saved in the storage: ', updated_data);
     });
   }
 
-  chrome.storage.sync.get("reading_log", function(items) {
-    previous_data = items["reading_log"];
-    console.log('[syncData]: Get sync data: ', items["reading_log"]);
+  chrome.storage.sync.get(mydata, function(items) {
+    previous_data = items[mydata];
+    console.log('[syncData]: Get sync data: ', items[mydata]);
 
     sync();
   });
