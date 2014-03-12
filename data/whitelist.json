@@ -1,47 +1,63 @@
-    {
-        "websites": [
-            {
-                "url":"taobao.com",
-                "type": "eshop"
-            },
-            {
-                "url": "tmall.com",
-                "type": "eshop"
-            },
-            {
-                "url": "ebay.com",
-                "type": "eshop"
-            },
-            {
-                "url": "jd.com",
-                "type": "eshop"
-            },
-            {
-                "url": "amazon.cn",
-                "type": "eshop"
-            },
-            {
-                "url": "weibo.com",
-                "type": "sns"
-            },
-            {
-                "url": "twitter.com",
-                "type": "sns"
-            },
-            {
-                "url": "4399.com",
-                "type": "game"
-            },
-            {
-                "url": "zhihu.com",
-                "type": "sns"
-            },
-            {
-                "url": "taobao.com",
-                "type": "eshop"
-            }
-        ],
-        "author": "Lene Huang",
-        "version": "0.1",
-        "date": "2014-3-7"
-    }
+  {
+    "websites": [
+      {
+        "url":"taobao.com",
+        "type": "eshop"
+      },
+      {
+        "url": "tmall.com",
+        "type": "eshop"
+      },
+      {
+        "url": "ebay.com",
+        "type": "eshop"
+      },
+      {
+        "url": "jd.com",
+        "type": "eshop"
+      },
+      {
+        "url": "amazon.cn",
+        "type": "eshop"
+      },
+      {
+        "url": "weibo.com",
+        "type": "sns"
+      },
+      {
+        "url": "twitter.com",
+        "type": "sns"
+      },
+      {
+        "url": "4399.com",
+        "type": "game"
+      },
+      {
+        "url": "zhihu.com",
+        "type": "sns"
+      },
+      {
+        "url": "taobao.com",
+        "type": "eshop"
+      },
+      {
+        "url": "mocoven.com",
+        "type": "mocoven"
+      },
+      {
+        "url": "github.com",
+        "type": "study"
+      },
+      {
+        "url": "google.com",
+        "type": "search"
+      },
+      {
+        "url": "baidu.com",
+        "type": "search"
+      }
+    ],
+    "author": "Lene Huang",
+    "version": "0.2",
+    "date": "2014-3-12"
+  }
