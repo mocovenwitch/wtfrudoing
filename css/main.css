@@ -28,3 +28,24 @@ footer {
 
 }
 
+.jumbotron h1 {
+  font-weight: bold;
+}
+
+.jumbotron .lead {
+  color: #888888;
+}
+
+.jumbotron.footer p {
+  font-size: 1.1em;
+}
+
+.descriptions p {
+  font-size: 1.3em;
+}
+
+.comments {
+  font-size: 3.0em;
+  font-weight: bold;
+}
+
