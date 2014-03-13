@@ -6,12 +6,12 @@ $.fn.peity.defaults.pie = {
   delimiter: null,
   diameter: 16,
   fill: [
-    "#ff9900",
-    "#ffbb00",
-    "#ffee00",
-    "#fff4dd",
-    "#ffff00",
-    "#ffd592"],
+    "#b8f1ed",
+    "#f1ccb8",
+    "#cb8e85",
+    "#f1b8e4",
+    "#cf8888",
+    "#b8f1cc"],
   height: 300,
   width: 300
 }
@@ -32,12 +32,15 @@ var MESSAGE_DESCRIPTION = {
 var MESSAGE_COMMON = {
     'RESET': '数据都清除了，让我们重头开始吧',
     'TITLE': '看看你都干了些什么！',
-    'APP_DESCRIPTION': '有一些计划做了好多年了，比如学一种弦乐；有一些决心下了 50 遍了，比如「如果我再把学英文的时间拿去逛淘宝，'
-                       + '就！剁！手！」「如果我再把学『解剖学』的时间拿去刷微博，就不准吃三文鱼刺身！」结果呢，5 年过去了，说好的学弦乐呢？信用卡账单也把眼球吓掉了吧？'
+    'APP_DESCRIPTION': '有一些计划做了好多年了，比如学一种弦乐；有一些决心下了 50 遍了，比如<br>「如果我再把学英文的时间拿去逛淘宝，'
+                       + '就剁手！」<br>「如果我再把学『解剖学』的时间拿去刷微博，就不准吃三文鱼刺身！」<br><br>结果呢，5 年过去了，说好的学弦乐呢？信用卡账单也把眼球吓掉了吧？'
                        + '那你的手剁了吗？至于解剖学……你能立刻说出窦房结在哪里以及它的功能吗？<br><br>所以，好好看看，你都干了些什么吧。',
     'UNIT': '分钟',
-    'COMMENTS': '送你一句话：亲爱的，滚去学习吧',
-    'NOTHING': '你还什么都没有干呢……'
+    'COMMENTS': '亲爱的，你就好好的，滚去学习吧',
+    'NOTHING': '你还什么都没有干呢……',
+    'NOTE': '这个应用不会收集你的浏览记录，不要担心我会把他们发给你的女朋友/男朋友。<br>如果你想重头开始观察自己有没有好好学习，'
+            + '请点击绿色按钮「我要洗心革面」。<br><br>另外，如果发现自己一直在虚度人生，尽然每天花了 8 小时在刷微博，请不要太过悔恨，'
+            + '就怪这个应用的算法不合理好了。'
 }
 
 var ERROR = {
@@ -51,7 +54,8 @@ var Report = {
   init: function() {
     $('#app_description').html(MESSAGE_COMMON['APP_DESCRIPTION']);
     $('.title').text(MESSAGE_COMMON['TITLE']);
-    $('.comments').text(MESSAGE_COMMON['COMMENTS']);
+    //$('.comments').text(MESSAGE_COMMON['COMMENTS']);
+    $('.note').html(MESSAGE_COMMON['NOTE']);
 
     this.getData();
   },

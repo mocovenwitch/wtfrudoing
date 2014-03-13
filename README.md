@@ -1,4 +1,20 @@
-wtfrudoing
+看看你都干了些什么！
 ==========
 
-See, what are you doing?!
+# 这是什么
+这是一个 Chrome Extension，在你的 Chrome 浏览器中使用。
+
+# 为什么要用
+这个应用可以告诉你，你到底在好好学习，还是在虚度人生。（虚度人生多少也是有必要的）
+
+# 安装
+（随后我会发出安装地址）
+
+# Copyright
+© 2014 Mocoven
+
+# 作者
+[默考文](http://www.mocoven.com)
+
+# 版本经常更新吗？
+会的，但是别催我！
