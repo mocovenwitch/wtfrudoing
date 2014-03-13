@@ -1,7 +1,7 @@
   {
     "websites": [
       {
-        "url":"taobao.com",
+        "url": "taobao.com",
         "type": "eshop"
       },
       {
@@ -45,7 +45,7 @@
         "type": "mocoven"
       },
       {
-        "url": "github.com",
+        "url": "github.",
         "type": "study"
       },
       {
@@ -55,9 +55,13 @@
       {
         "url": "baidu.com",
         "type": "search"
+      },
+      {
+        "url": "qq.com",
+        "type": "sns"
       }
     ],
     "author": "Lene Huang",
-    "version": "0.2",
-    "date": "2014-3-12"
+    "version": "0.3",
+    "date": "2014-3-13"
   }

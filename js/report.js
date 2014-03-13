@@ -7,11 +7,11 @@ $.fn.peity.defaults.pie = {
   diameter: 16,
   fill: [
     "#b8f1ed",
-    "#f1ccb8",
-    "#cb8e85",
     "#f1b8e4",
+    "#e27386",
+    "#f1ccb8",
     "#cf8888",
-    "#b8f1cc"],
+    "#b8f1ff"],
   height: 300,
   width: 300
 }
@@ -40,7 +40,8 @@ var MESSAGE_COMMON = {
     'NOTHING': '你还什么都没有干呢……',
     'NOTE': '这个应用不会收集你的浏览记录，不要担心我会把他们发给你的女朋友/男朋友。<br>如果你想重头开始观察自己有没有好好学习，'
             + '请点击绿色按钮「我要洗心革面」。<br><br>另外，如果发现自己一直在虚度人生，尽然每天花了 8 小时在刷微博，请不要太过悔恨，'
-            + '就怪这个应用的算法不合理好了。'
+            + '就怪这个应用的算法不合理好了。',
+    'RESET_BUTTON': '我要洗心革面'
 }
 
 var ERROR = {
@@ -56,6 +57,7 @@ var Report = {
     $('.title').text(MESSAGE_COMMON['TITLE']);
     //$('.comments').text(MESSAGE_COMMON['COMMENTS']);
     $('.note').html(MESSAGE_COMMON['NOTE']);
+    $('#clear_history').text(MESSAGE_COMMON['RESET_BUTTON']);
 
     this.getData();
   },
@@ -73,6 +75,31 @@ var Report = {
       pieParts = pieParts.toString().substring(1, pieParts.length);
       $('.report').find('.pie').text(pieParts);
       this.chart.peity('pie');
+
+      // animation
+      var position = 'center';
+      var target = $('.peity');
+      var deg = 180;
+      var animateNow = function(target, where, deg) {
+        target.animate({'margin-left': where}, {duration: 1000,
+          step: function(deg) {
+            target.css({"transform": "rotate("+deg+"deg)"});
+          }});
+      };
+
+      target.on('mouseenter', function(){
+        //alert('sdf');
+        if(position == 'center') {
+          animateNow(target, '+=600px', deg);
+          position = 'left';
+        } else if(position == 'left') {
+          animateNow(target, '-=1200px', deg);
+          position = 'right';
+        } else if(position == 'right') {
+          animateNow(target, '+=1200px', deg);
+          position = 'left';
+        }
+      });
     } else {
       $('.report').find('.peity').detach();
       $('.report').find('.pie').detach();
@@ -127,3 +154,4 @@ $('#clear_history').click(function() {
 $(document).ready(function() {
   Report.init();
 });
+
